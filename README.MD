@@ -2,35 +2,17 @@
 
 This tutorial demonstrates how to create an ASP.NET Core application with Razor Pages that uses the DevExpress ORM Library (XPO) to access and manage data. In this tutorial, we store data in the [in-memory source](https://docs.devexpress.com/XPO/DevExpress.Xpo.DB.InMemoryDataStore) and use the JSON format to save and load data to/from the data source.
 
-<p align="center">
-  <img src="../../../../Tutorials/images/MVC.RazorPages/7.1.png">
-</p>
-<p align="center">
-  <img src="../../../../Tutorials/images/MVC.RazorPages/7.2.png">
-</p>
-
-
-## Prerequisites
-
-* [Visual Studio 2019](https://visualstudio.microsoft.com/vs/) with the following workloads:
-  * **ASP.NET and web development**
-  * **.NET Core cross-platform development**
-* [.NET Core SDK 3.1 or later](https://www.microsoft.com/net/download/all)
-* [Unified Installer for .NET and HTML5 Developers](https://www.devexpress.com/Products/Try/)
-  * We recommend that you select all the DevExpress products when you run the installation. It will register local NuGet package sources, item and project templates required for these tutorials. You can uninstall unnecessary components later. 
-
 ## Step 1: Create an ASP.NET Core Web App with the DevExtreme Template
 
 1. Open Visual Studio and create a new project.
-2. Search for the **DevExtreme 20.1 ASP.NET Core Application (.NET Core)** template. <p align="center"><img width="800" src="../../../../Tutorials/images/MVC.RazorPages/1.1.png"></p>
+2. Search for the **DevExtreme 20.1 ASP.NET Core Application (.NET Core)** template. 
 
     Click **Next** to proceed.
 
-3. Set the project name to **AspNetCoreRazorPagesApplication** and click **Create**. <p align="center"><img width="800" src="../../../../Tutorials/images/MVC.RazorPages/1.2.png"></p>
+3. Set the project name to **AspNetCoreRazorPagesApplication** and click **Create**. 
 
 4. Select **ASP.NET Core 3.1** and **Razor Pages** and click Create.
 
-    <p align="center"><img width="540" src="../../../../Tutorials/images/MVC.RazorPages/1.2.1.png"></p>
 
 5. In the **Solution Explorer**, remove unnecessary files:
 
@@ -38,9 +20,7 @@ This tutorial demonstrates how to create an ASP.NET Core application with Razor 
     * *Controllers\OrdersController.cs*
     * *Models\Order.cs*
     * *Models\SampleData.cs*
-    * *Views\Home\Index.cshtml*
-
-    <p align="center"><img width="400" src="../../../../Tutorials/images/MVC.RazorPages/1.3.png"></p>
+    * *Views\Home\Index.cshtml*    
 
 
 For more information, see the following:
@@ -67,25 +47,15 @@ Use any of the following approaches to install the XPO package:
 * In the left top corner under **Browse**, search for the `DevExpress.Xpo` package and select its latest version, 20.1, on the right.
 * Click **Install** on the right and accept all the licenses in the **License Acceptance** dialogs.
 
-    <p align="center"><img width="1000" src="../../../../Tutorials/images/MVC.RazorPages/2.2.png"></p>
-    
-
-For more information, see the following:
-
-  * https://www.nuget.org/
-  * https://nuget.devexpress.com/
-
 ## Step 3: Create ORM data model and seed initial data
 
 1. In the **Solution Explorer**, create the **DataAccess** folder and add the *Customer.cs*, *Order.cs* and *DemoDataHelper.cs* code files. 
-
-  <p align="center"><img width="600" src="../../../../Tutorials/images/MVC.RazorPages/3.1.png"></p>
+  
 
 2. Replace their contents with the code copied from the [corresponding files under this shared folder](https://github.com/DevExpress/XPO/tree/master/Tutorials/ASP.NET/MVC.RazorPages/CS/DataAccess). These files contain the following classes:
     * `Customer` and `Order` implement the persistent data model that maps to the corresponding tables in the database.
     * `DemoDataHelper` implements the `Seed` method to create and save initial data in the database. This method will be called at the application startup in the next steps.
-    
-    <p align="center"><img src="../../../../Tutorials/images/MVC.RazorPages/3.2.png"></p>
+
 
 For more information, see the following:
 
@@ -99,8 +69,6 @@ For more information, see the following:
 
     * `JsonPopulateObjectHelper`: implement a persistent type JSON serialization and deserialization.
     * `ApplicationBuilderExtensions`: declares the extension method `UseXpoDemoData`. It calls `DemoDataHelper` at the application startup in the next steps.
-
-    <p align="center"><img src="../../../../Tutorials/images/MVC.RazorPages/4.png"></p>
 
 
 For more information, see the following:
@@ -210,25 +178,20 @@ For more information, see the following:
     * The following asynchronous XPO methods are used to implement CRUD operations in these controller methods: [Session.GetObjectByKeyAsync](https://docs.devexpress.com/XPO/DevExpress.Xpo.Session.GetObjectByKeyAsync.overloads), [Session.Delete](https://docs.devexpress.com/XPO/DevExpress.Xpo.Session.Delete.overloads), [UnitOfWork.CommitChangesAsync](https://docs.devexpress.com/XPO/DevExpress.Xpo.UnitOfWork.CommitChangesAsync.overloads).
 
 3. Right-click the **Pages** folder and select **Add > Razor Page**.
-
-    <p align="center"><img src="../../../../Tutorials/images/MVC.RazorPages/6.1.png"></p>
+ 
 
 4. In the **Add Scaffold** dialog, select **Razor Page** and click **Add**.
-
-    <p align="center"><img src="../../../../Tutorials/images/MVC.RazorPages/6.2.png"></p>
+   
 
 5. In the **Add Razor Page** dialog, set the page name to **Index**, unselect *"Generate PageModel class"* item, and click **Add**.
 
-    <p align="center"><img src="../../../../Tutorials/images/MVC.RazorPages/6.3.png"></p>
 
 6. Replace the contents of *Pages/Index.cshtml* with the code copied from [the corresponding code file](https://github.com/DevExpress/XPO/blob/master/Tutorials/ASP.NET/MVC.RazorPages/CS/Pages/Index.cshtml). It declares the Index page to display and edit the Customers list. 
 
     * [Razor syntax](https://www.w3schools.com/asp/razor_intro.asp) is used to configure [DevExtreme-based ASP.NET Core controls](https://docs.devexpress.com/AspNetCore/400571/concepts/devextreme-based-controls?v=20.1). 
     * The `DataSource` method is used to [bind data](https://docs.devexpress.com/AspNetCore/400575/concepts/devextreme-based-controls/data-binding?v=20.1) from the aforementioned Controller methods to the [DataGrid](https://js.devexpress.com/Documentation/Guide/Widgets/DataGrid/Overview/) control.
     * The [Popup](https://js.devexpress.com/Demos/Widgetsgallery/Demo/Popup/Overview/jQuery/Light/) control is used to view and edit data in detail forms.
-
-    <p align="center"><img src="../../../../Tutorials/images/MVC.RazorPages/6.4.png"></p>
-
+   
 
 For more information, see the following:
 
@@ -243,13 +206,5 @@ For more information, see the following:
 
 Press **F5** to build and run the application. The web browser should show the _Customers_ list. You can create, edit or delete customers.
 
-<p align="center">
-  <img width="800" src="../../../../Tutorials/images/MVC.RazorPages/7.1.png">
-</p>
-
 
 You can also view and edit their related orders in a separate form.
-
-<p align="center">
-  <img width="800" src="../../../../Tutorials/images/MVC.RazorPages/7.2.png">
-</p>
